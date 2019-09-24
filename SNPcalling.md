@@ -70,7 +70,7 @@ cat *2.fq.gz > concat_2.gz
 fastqc concat_1.gz concat_2.gz
 
 ```
-The output iles are [output/1_sample_fastqc.html](output/1_sample_fastqc.html) and [output/2_sample_fastqc.html](output/2_sample_fastqc.html)
+The output files are [output/1_sample_fastqc.html](output/1_sample_fastqc.html) and [output/2_sample_fastqc.html](output/2_sample_fastqc.html)
 
 We can see that both reads start with the same barcodes so we can proceed. 
 It is single-length, we will be able to proceed forward.
