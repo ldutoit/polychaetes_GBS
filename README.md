@@ -2,7 +2,7 @@
 
 ## Description
 
-SNP calling for Polychaetes collected along the australian coast and sequenced paired end with a Pst1 restriction.
+SNP calling for Polychaetes collected along the Australian coast and sequenced paired end with a Pst1 restriction.
 
 
 ### Key Players
@@ -13,7 +13,7 @@ Ceridwen Fraser (PI)
 
 ### Physical location of the data
 
-For now, the raw data is on the Johnson lab repos of the otago high capacity storage:
+For now, the raw data is on the Johnson lab repos of the Otago high capacity storage:
 
 smb://storage.hcs-p01.otago.ac.nz/sci-bioinformatics-project-archive/CeridwenPolychaetes
 
