@@ -272,7 +272,7 @@ The SNPs are in [output/filtered33percent/](output/filtered33percent/)
 #Numberof loci with n SNPs 		284	165	78	53	28	18	9	10	7	8	4	2	3	3	1	4	1	1
 ```
 
-** removing 40% of individuals but getting more SNPs**
+**Removing 40% of individuals but getting more SNPs**
 
 To show a contrasting pictures, I can retrieve more SNPs by removing 
 
@@ -318,7 +318,7 @@ mkdir filtered40percent
 populations -P output_M2/ -M popmap_filtered40percent.txt  --vcf --structure --plink --treemix --max-obs-het 0.65 -r 0.6 -O filtered40percent # then filter it with 
 ```
 
-We obtained a final dataset of 2829 SNPs for 286 individuals identified in [popmap_filtered40percent.txt](output/filtered40percent/popmap_filtered40percent.txt)
+We obtained a final dataset of **2829 SNPs for 286 individuals** identified in [popmap_filtered40percent.txt](output/filtered40percent/popmap_filtered40percent.txt)
 
 The SNPs are in [output/filtered40percent/](output/filtered40percent/)
 
