@@ -1,5 +1,7 @@
 # SNPcalling.md
 
+This script process the data from raw to a set of reliable SNPs using Stacks v2.41
+
 ## 1. Understanding/Exploring the data
 
 The data is paired. To understand the structure, the adaptor content and the barcodes I subset the two big *.gz* files to 25'000 reads.
