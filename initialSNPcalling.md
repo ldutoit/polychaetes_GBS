@@ -66,6 +66,7 @@ Two samples ,  1.1.2.16 and 3.2.2.27  have absolutely no data after processing, 
 First, we create a new population map without those two samples:
 
 ```
+#bash
 grep 1.1.2.16 popmap_all.txt -v  >   popmap_all_nonull.txt
 grep 3.2.2.27  popmap_all_nonull.txt -v  >   popmap_all_nonull2.txt
 ```
@@ -73,6 +74,7 @@ We then run the last steps of the pipeline.
 
 
 ```
+#bash
 tsv2bam -P output_M2/ -M popmap_all_nonull2.txt
 gstacks -P output_M2 -M popmap_all_nonull2.txt
 
@@ -81,6 +83,7 @@ gstacks -P output_M2 -M popmap_all_nonull2.txt
 We then run populations, excluding no samples and only the SNPs with more than 65% heterozygosity as likely collapsed paralogs.
 
 ```
+#bash
 populations -P output_M2/ -M popmap_all_nonull2.txt  --vcf  --max-het 0.65 # then filter it with 
 ```
 This creates a *source* unfiltered dataset for which we can try different type of filtering.  We are interested in removing low quality individuals ( very few SNPs sequenced) and very low quality SNPs ( very few individuals covered).
@@ -96,6 +99,7 @@ The SNPs are in [output/unfiltered/](output/unfiltered/).
 I then use a little bit of R code to investigate how much SNps we have across how many individuals?
 
 ```
+#R
 library("VariantAnnotation")
 data<-readVcf("populations.snps.vcf")
 
@@ -123,19 +127,21 @@ Without strong knowledge of the systems and the study goal, it is hard to make a
 I choose to make a dataset where I removed the worse 1/3 of samples, therefore excluding any sample with less than 1919 SNPs:
 
 ```
+#R
 quantile(nonmissing,0.33)
 lowest_samples <-names(which(nonmissing<1918.48))# remove the lowest 33%
 ```
 
 I explore what is left and what do if we remove those in R still.
 ```
+#R
 prefilter_gt<-geno(data)$GT # create a genotype matrix
 sample_filtered<- prefilter_gt[,-which(colnames(prefilter_gt)%in%lowest_samples)] # remove those samples
 propofmissingpersnp<-apply(sample_filtered,1,numbermissing)/dim(sample_filtered)[2] # what is the proportion of missing data snp by snp
 length(which(propofmissingpersnp<0.4)) # 60% or more of individuals have data, how many SNP is that?
 ```
 
-***Removing the 33% individuals with the lowest number of SNPs and then excluding SNP for which less than 60% of individuals have data seem to be a fair call for a filtering step ***
+**Removing the 33% individuals with the lowest number of SNPs and then excluding SNP for which less than 60% of individuals have data seem to be a fair call for a filtering step**
 
 To do so, I create a final popmap without those individuals
 
@@ -144,7 +150,7 @@ popmap<-read.table("../popmap_all_nonull2.txt")
 new_popmap<-popmap[-which(as.character(popmap[,1])%in%lowest_samples),]
 write.table(new_popmap,"../popmap_filtered33percent.txt",sep="\t",row.names=F,col.names=F,quote=F)
 ```
-And finally back in bash I create those SNP files ion the vcf, structure, plink and treemix formats
+And finally back in bash I create those SNP files intn the vcf, structure, plink and treemix formats
 
 ```
 mkdir filtered33percent
@@ -169,6 +175,7 @@ To show a contrasting pictures, I can retrieve more SNPs by removing
 
 back into R :
 ```
+#R
 library("VariantAnnotation")
 data<-readVcf("populations.snps.vcf")
 
@@ -205,6 +212,7 @@ par(mfrow=c(1,2))
 
 Finally we create the dataset using:
 ```
+#bash
 mkdir filtered40percent
 populations -P output_M2/ -M popmap_filtered40percent.txt  --vcf --structure --plink --treemix --max-obs-het 0.65 -r 0.6 -O filtered40percent # then filter it with 
 ```
