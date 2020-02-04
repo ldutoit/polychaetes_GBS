@@ -13,7 +13,7 @@ Ceridwen Fraser (PI)
 
 ### Physical location of the data
 
-For now, the raw data is on the Johnson lab repos of the Otago high capacity storage:
+For now, the raw data is on the Otago high capacity storage:
 
 smb://storage.hcs-p01.otago.ac.nz/sci-bioinformatics-project-archive/CeridwenPolychaetes
 
