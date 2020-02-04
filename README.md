@@ -39,3 +39,6 @@ The number of SNPs per individual before filtering can be visualised below:
 
 ![](output/numberofSNPsperindsbeforefiltering.png)
 
+
+[initialSNPcalling.md](initialSNPcalling.md) reports the SNP calling in a format suitable for the Supplementary information of the ms.
+
